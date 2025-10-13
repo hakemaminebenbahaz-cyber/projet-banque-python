@@ -1,3 +1,4 @@
+from compte import CompteBancaire
 import json
 
 def charger_comptes():
