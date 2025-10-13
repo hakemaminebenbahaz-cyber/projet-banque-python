@@ -39,3 +39,6 @@ class CompteBancaire:
         print(f"Historique de {self.titulaire} :")
         for operation in self.historique:
             print(operation)
+            
+    def afficher(self):
+        print(f"{self.titulaire}, {self.account_number}, {self.solde}")
