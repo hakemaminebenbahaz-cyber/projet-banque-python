@@ -4,6 +4,7 @@ class CompteBancaire:
         import random
         self.account_number = random.randint(1000000000, 9999999999)
         self.solde = solde
+        self.epargne = 0 
         self.historique = []
 
 
