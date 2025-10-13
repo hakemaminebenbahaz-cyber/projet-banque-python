@@ -1,11 +1,11 @@
 from compte import CompteBancaire
 
-# Création d'un compte test
-compte = CompteBancaire("Ross")
+ross = CompteBancaire("Ross")
+rachel = CompteBancaire("Rachel")
 
-# Dépôt et retrait
-compte.deposer(500)
-compte.retirer(1000)
+ross.deposer(500)
+ross.transferer(rachel, 300)
+ross.epargner(200)
 
-# Afficher le solde
-print(f"Solde final de {compte.titulaire} : {compte.solde}")
+ross.afficher_historique()
+rachel.afficher_historique()
