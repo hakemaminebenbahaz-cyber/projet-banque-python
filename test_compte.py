@@ -7,5 +7,5 @@ ross.deposer(500)
 ross.transferer(rachel, 300)
 ross.epargner(200)
 
-ross.afficher_historique()
-rachel.afficher_historique()
+ross.afficher()
+rachel.afficher()
