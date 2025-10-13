@@ -25,3 +25,13 @@ def charger_compte_utilisateur(username):
     else:
         print("Utilisateur non trouvé.")
         return None
+    def sauvegarder_compte_utilisateur(compte):
+    comptes = charger_comptes()
+    comptes[compte.titulaire] = {
+        "password": comptes[compte.titulaire]["password"],
+        "numero_compte": comptes[compte.titulaire]["numero_compte"],
+        "solde": compte.solde,
+        "epargne": compte.epargne,
+        "historique": compte.historique
+    }
+    sauvegarder_comptes(comptes)
