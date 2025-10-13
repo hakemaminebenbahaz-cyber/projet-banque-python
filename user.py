@@ -14,3 +14,14 @@ def verifier_login(username, password, comptes):
         return True
     return False
 
+def charger_compte_utilisateur(username):
+    comptes = charger_comptes()
+    if username in comptes:
+        data = comptes[username]
+        compte = CompteBancaire(titulaire=username, solde=data["solde"])
+        compte.epargne = data["epargne"]
+        compte.historique = data["historique"]
+        return compte
+    else:
+        print("Utilisateur non trouvé.")
+        return None
