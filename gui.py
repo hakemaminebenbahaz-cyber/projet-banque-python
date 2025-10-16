@@ -87,6 +87,41 @@ class Application(tk.Tk):
                 messagebox.showerror("Erreur", "Montant invalide")
 
         tk.Button(popup, text="Valider", command=valider).pack(pady=10)
+    
+    def popup_transferer(self):
+        popup = tk.Toplevel(self)
+        popup.title("Transfert d'argent")
+
+        tk.Label(popup, text="Destinataire:").pack(pady=5)
+        entry_dest = tk.Entry(popup)
+        entry_dest.pack(pady=5)
+
+        tk.Label(popup, text="Montant:").pack(pady=5)
+        entry_montant = tk.Entry(popup)
+        entry_montant.pack(pady=5)
+
+        def valider():
+            try:
+                from user import UserManager
+                montant = float(entry_montant.get())
+                dest_nom = entry_dest.get()
+
+                manager = UserManager("data/comptes.json")
+                dest_compte = manager.get_compte(dest_nom)
+
+                if dest_compte:
+                    self.compte_actuel.transferer(dest_compte, montant)
+                    self.label_solde.config(text=f"Solde: {self.compte_actuel.solde} €")
+                    manager.sauvegarder_comptes()
+                    messagebox.showinfo("Succès", "Transfert effectué")
+                    popup.destroy()
+                else:
+                    messagebox.showerror("Erreur", "Destinataire introuvable")
+            except ValueError:
+                messagebox.showerror("Erreur", "Montant invalide")
+
+        tk.Button(popup, text="Valider", command=valider).pack(pady=10)
+
 
 
 
