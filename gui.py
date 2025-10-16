@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from user import UserManager 
+from compte import CompteBancaire
 
 class Application(tk.Tk):
     def __init__(self):
@@ -39,16 +40,24 @@ class Application(tk.Tk):
             messagebox.showerror("Erreur", "Identifiants incorrects")
 
 
-    def show_dashboard(self, user):
+        def show_dashboard(self, user):
         self.clear_window()
-        tk.Label(self, text=f"Bienvenue {user}", font=("Arial", 14)).pack(pady=10)
+        tk.Label(self, text=f"Tableau de bord de {user}", font=("Arial", 14)).pack(pady=10)
+
+        self.label_solde = tk.Label(self, text=f"Solde: {self.compte_actuel.solde} €", font=("Arial", 12))
+        self.label_solde.pack(pady=10)
+
+        tk.Button(self, text="Déposer", command=self.popup_deposer).pack(pady=5)
+        tk.Button(self, text="Retirer", command=self.popup_retirer).pack(pady=5)
+        tk.Button(self, text="Transférer", command=self.popup_transferer).pack(pady=5)
+        tk.Button(self, text="Historique", command=self.popup_historique).pack(pady=5)
         tk.Button(self, text="Se déconnecter", command=self.show_login).pack(pady=10)
 
 
     def clear_window(self):
         for widget in self.winfo_children():
             widget.destroy()
-            
+
 
 if __name__ == "__main__":
     app = Application()
