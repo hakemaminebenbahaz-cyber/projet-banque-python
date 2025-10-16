@@ -4,6 +4,7 @@ from user import UserManager
 from compte import CompteBancaire
 
 class Application(tk.Tk):
+    
     def __init__(self):
         super().__init__()
         self.title("Banque - Connexion")
@@ -40,7 +41,7 @@ class Application(tk.Tk):
             messagebox.showerror("Erreur", "Identifiants incorrects")
 
 
-        def show_dashboard(self, user):
+    def show_dashboard(self, user):
         self.clear_window()
         tk.Label(self, text=f"Tableau de bord de {user}", font=("Arial", 14)).pack(pady=10)
 
