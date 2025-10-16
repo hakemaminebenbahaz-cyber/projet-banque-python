@@ -59,7 +59,8 @@ class Application(tk.Tk):
         for widget in self.winfo_children():
             widget.destroy()
     
-        def popup_deposer(self):
+    
+    def popup_deposer(self):
         self.popup_operation("deposer")
 
     def popup_retirer(self):
