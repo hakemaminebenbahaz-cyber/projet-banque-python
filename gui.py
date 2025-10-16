@@ -58,6 +58,35 @@ class Application(tk.Tk):
     def clear_window(self):
         for widget in self.winfo_children():
             widget.destroy()
+    
+        def popup_deposer(self):
+        self.popup_operation("deposer")
+
+    def popup_retirer(self):
+        self.popup_operation("retirer")
+
+    def popup_operation(self, type_op):
+        popup = tk.Toplevel(self)
+        popup.title(f"{type_op.capitalize()} de l'argent")
+        tk.Label(popup, text="Montant :").pack(pady=5)
+        entry_montant = tk.Entry(popup)
+        entry_montant.pack(pady=5)
+
+        def valider():
+            try:
+                montant = float(entry_montant.get())
+                if type_op == "deposer":
+                    self.compte_actuel.deposer(montant)
+                else:
+                    self.compte_actuel.retirer(montant)
+                self.label_solde.config(text=f"Solde: {self.compte_actuel.solde} €")
+                messagebox.showinfo("Succès", "Opération réussie")
+                popup.destroy()
+            except ValueError:
+                messagebox.showerror("Erreur", "Montant invalide")
+
+        tk.Button(popup, text="Valider", command=valider).pack(pady=10)
+
 
 
 if __name__ == "__main__":
