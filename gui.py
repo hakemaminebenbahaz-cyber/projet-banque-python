@@ -121,6 +121,17 @@ class Application(tk.Tk):
                 messagebox.showerror("Erreur", "Montant invalide")
 
         tk.Button(popup, text="Valider", command=valider).pack(pady=10)
+    
+    def popup_historique(self):
+        popup = tk.Toplevel(self)
+        popup.title("Historique des transactions")
+        text = tk.Text(popup, width=50, height=15)
+        text.pack(padx=10, pady=10)
+
+        for ligne in self.compte_actuel.historique:
+            text.insert(tk.END, ligne + "\n")
+
+        text.config(state="disabled")
 
 
 
