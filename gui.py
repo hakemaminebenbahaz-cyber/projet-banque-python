@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from user import UserManager 
 
 class Application(tk.Tk):
     def __init__(self):
@@ -9,6 +10,7 @@ class Application(tk.Tk):
         self.configure(bg="#f0f0f0")
 
         self.show_login()
+
 
     def show_login(self):
         self.clear_window()
@@ -22,24 +24,32 @@ class Application(tk.Tk):
 
         tk.Button(self, text="Se connecter", command=self.login).pack(pady=20)
 
+
     def login(self):
         username = self.entry_user.get()
         password = self.entry_pass.get()
-        if username == "Ross" and password == "1234":  # temporaire
+
+        manager = UserManager("data/comptes.json")
+        compte = manager.verifier_login(username, password)
+
+        if compte:
+            self.compte_actuel = compte
             self.show_dashboard(username)
         else:
             messagebox.showerror("Erreur", "Identifiants incorrects")
+
 
     def show_dashboard(self, user):
         self.clear_window()
         tk.Label(self, text=f"Bienvenue {user}", font=("Arial", 14)).pack(pady=10)
         tk.Button(self, text="Se déconnecter", command=self.show_login).pack(pady=10)
 
+
     def clear_window(self):
         for widget in self.winfo_children():
             widget.destroy()
+            
 
 if __name__ == "__main__":
     app = Application()
     app.mainloop()
-    
